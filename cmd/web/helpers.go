@@ -1,9 +1,10 @@
 package main
 
 import (
-  "bytes"
+	"bytes"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func (app *application) serverError(w http.ResponseWriter, r *http.Request, err error) {
@@ -32,15 +33,21 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 		return
 	}
 
-  buf := new(bytes.Buffer)
+	buf := new(bytes.Buffer)
 
 	err := ts.ExecuteTemplate(buf, "base", data)
 	if err != nil {
 		app.serverError(w, r, err)
-    return
+		return
 	}
 
 	w.WriteHeader(status)
 
-  buf.WriteTo(w)
+	buf.WriteTo(w)
+}
+
+func (app *application) newTemplateData(r *http.Request) templateData {
+	return templateData{
+		CurrentYear: time.Now().Year(),
+	}
 }
