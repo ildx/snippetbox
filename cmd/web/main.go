@@ -60,14 +60,15 @@ func main() {
 		sessionManager: sessionManager,
 	}
 
-  srv := &http.Server{
-    Addr:     *addr,
-    Handler: app.routes(),
-  }
+	srv := &http.Server{
+		Addr:     *addr,
+		Handler:  app.routes(),
+		ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
+	}
 
 	logger.Info("starting server", "addr", srv.Addr)
 
-  err = srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	logger.Error(err.Error())
 	os.Exit(1)
 }
