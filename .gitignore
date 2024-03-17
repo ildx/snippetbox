@@ -15,9 +15,17 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+/vendor/
+/Godeps/
+
+# TLS Certificates and keys
+tls/
+
+# Local binary file
+bin/
 
 # Go workspace file
 go.work
 
+# Mac
 .DS_Store
