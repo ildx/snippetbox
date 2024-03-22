@@ -9,3 +9,15 @@ To generate a self-signed certificate for local development, run the following c
 mkdir tls && cd tls
 go run /PATH_TO_YOUR_GO_INSTALLATION/go/src/crypto/tls/generate_cert.go --rsa-bits=2068 --host=localhost
 ```
+
+## Run the app
+```bash
+go run cmd/web
+```
+
+## Run tests
+```bash
+go test ./...
+# or
+go test -v ./cmd/web
+```
